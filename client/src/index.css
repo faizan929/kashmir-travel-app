@@ -1,0 +1,106 @@
+.heading {
+  text-align: center;
+  margin-top: 50px;
+}
+
+
+.first-heading {
+  font-size: 2.5rem;
+  color: #2a3069;
+  margin-bottom:-2px;
+
+ 
+}
+
+
+.info {
+  font-size: 1.2rem;
+  color: #b11818b7;
+  margin-top: 5px;
+}
+
+
+
+.explore {
+    margin: 40px auto;
+    text-align: center;  
+}
+
+
+input[type="text"] {
+    padding: 10px;
+    width: 300px;
+    font-size: 1rem;
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+
+
+.cards-section {
+    display: flex;
+    justify-content: center;
+    gap:20px;
+
+}
+
+
+.card{
+    padding: 20px;
+    background-color: #f5f5f5;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+}
+
+
+.login-btn {
+    padding: 10px 20px;
+    background-color: #1e90ff;
+    color: white;
+    border: None;
+    border-radius: 5px;
+    cursor: pointer
+}
+
+
+
+.login-popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 2rem;
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    border-radius: 10px;
+    z-index: 1000;
+}
+
+
+.login-popup > input {
+    display: block;
+    width: 100%;
+    margin: 10px 0;
+    padding: 0.5rem;
+
+}
+
+
+
+.login-popup button {
+    margin-right: 10px;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+}
+
+
+.toggle-auth {
+    margin-top: 10px;
+    font-size: 0.9rem;
+}
+
+.toggle-auth > span {
+    color: blue;
+    cursor: pointer;
+    font-weight: bold;
+}

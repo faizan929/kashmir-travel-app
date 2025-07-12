@@ -2,6 +2,8 @@
 
 import React from "react";
 
+import "./LoginPopup.css";
+
 function LoginPopup({
     //object destructuring
     isSignup,
@@ -20,6 +22,10 @@ function LoginPopup({
     return (
         
         <div className="login-popup">
+
+                    <div className="popup-header">
+                        <button className="close-button" onClick={()=> setShowLogin(false)}>×</button>
+                    </div>
                     <h3>{isSignup ? "Sign up" : "Login"}</h3>
 
                     {isSignup && (
@@ -59,7 +65,7 @@ function LoginPopup({
                     )}
                     
 
-                    <button onClick={ ()=> setShowLogin(false)}>Close</button>
+                    {/* <button onClick={ ()=> setShowLogin(false)}>Close</button> */}
                     <button onClick={handleLogin}>{isSignup ? "Sign up" : "Login"}</button>
 
                     <p className="toggle-auth">

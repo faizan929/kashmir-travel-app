@@ -1,26 +1,64 @@
+
+
 .navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px 30px;
-    background-color: #004d4d;
-    color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #8e95c4;
+  padding: 15px 30px;
+  /* position: sticky; */
+  top: 0;
+  z-index: 10;
 }
 
-.logo {
-     font-size:25px;
-     font-weight: bold;
-
+.navbar-left {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  position: relative;
 }
 
+.logo-link {
+  text-decoration: none;
+  color: #1e1e1e;
+  font-weight: bold;
+  font-size: 1.8rem;
+}
+
+.tagline {
+  font-size: 0.85rem;
+  color: #f0f0f0;
+  margin-top: -10px;
+  margin-left: 4px;
+  font-style: italic;
+  
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+}
 
 .nav-links a {
-    color: white;
-    text-decoration: none;
-    margin-left: 20px;
-    font-size: 18px;
+  text-decoration: none;
+  color: #1e1e1e;
+  font-weight: 500;
+  transition: color 0.3s ease;
 }
 
 .nav-links a:hover {
-    text-decoration: underline;
+  color: #333;
+}
+
+.login-btn {
+  padding: 6px 12px;
+  background-color: rgb(112, 48, 172);
+  border: 1px solid #ccc;
+  cursor: pointer;
+  transition: background-color 0.5s ease;
+}
+
+.login-btn:hover {
+  background-color: #e8e8e8;
 }

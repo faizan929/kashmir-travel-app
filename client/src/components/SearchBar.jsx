@@ -3,7 +3,7 @@
 
 function SearchBar(){
     return(
-    <div className="search-bar">
+    <div className="search-bar" id="search-bar">
       <input  type="text" placeholder="Search places, hotels, cabs..." />
 
     </div>

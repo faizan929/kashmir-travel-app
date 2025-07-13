@@ -14,7 +14,7 @@ function Home(){
                     {/* <h1 className="first-heading">Asi ti Lassi</h1> */}
                    
                     <p className="info">Explore beautiful places, book cabs and hotels, travel stress-free.</p>
-                        <button onClick={()=>{
+                        <button className="explore-btn" onClick={()=>{
                             const el = document.getElementById("search-bar");
                             if (el) {
                             el.scrollIntoView({behavior:"smooth"});

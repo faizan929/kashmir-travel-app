@@ -18,7 +18,7 @@ const authMiddleware = (req, res, next) => {
         console.log("Access granted.", decoded)
         next();
     } catch(err) {
-        console.error("❌ JWT Error:", err.message);
+        console.error("JWT Error:", err.message);
         res.status(400).json({ message: "Invalid token." });  
     }
 };

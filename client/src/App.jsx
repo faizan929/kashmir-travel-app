@@ -21,7 +21,7 @@ function App(){
       const [confirmPassword, setConfirmPassword]=useState("")
       const [isSignup, setIsSignup]=useState(false);
      
-    function handleLogin(){
+    async function handleLogin(){
         if (isSignup){
 
             if(!name || !email || !password || !confirmPassword){
@@ -29,20 +29,60 @@ function App(){
             return;
             }
 
-            if(password!=confirmPassword){
+            if(password != confirmPassword){
                 alert("Passwords do not match");
                 return;
             }
+            try {
+              const res = await fetch("http://localhost:5000/api/auth/register", {
+                method : "POST",
+                headers :   { "Content-type" : "application/json"},
+                body : JSON.stringify({name, email, password }),
+              });
 
-            console.log("Signing up: ", {name, email, password});
-            alert("Signup clicked!");
+              const data =await res.json();
+              if (!res.ok){
+                alert(data.message || "Registration failed.");
+                return;
+              }
+
+              alert("Registration successful. Please log in.");
+              setIsSignup(false);
+            } catch(error) {
+              console.error(error)
+              alert("Something went wrong. Try again.")
+            } 
         }else{
             if(!email || !password){
                 alert("Please fill in both the fields.");
                 return;
             }
-            console.log("Logging in:", {email, password});
-            alert("Login clicked");
+            try {
+              const res = await fetch ("http://localhost:5000/api/auth/login", {
+                method : "POST", 
+                headers : { "Content-type": "application/json" },
+                body: JSON.stringify({ email, password }),
+              });
+
+              const data = await res.json()
+
+              if (!res.ok) {
+                alert(data.message || "Login Failed");
+                return;
+              }
+
+
+              localStorage.setItem("token", data.token);
+              localStorage.setItem("user", JSON.stringify(data.user))
+
+
+              alert("Login successful.");
+              setShowLogin(false);
+
+            }catch(error){
+              console.error(error);
+              alert("Something went wrong. Try again.")
+            }
         }
     }
 

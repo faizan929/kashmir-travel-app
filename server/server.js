@@ -17,6 +17,7 @@ app.use(express.json());
 app.use('/api/auth', require('./routes/auth'));
 app.use('/api/hotels', require('./routes/hotels'))
 app.use('/api/cabs', require('./routes/cabs'))
+app.use('/api/bookings', require('./routes/bookings'))
 
 mongoose.connect(process.env.MONGO_URI)
     .then(() =>{

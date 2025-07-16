@@ -10,11 +10,12 @@ const bookingSchema = new mongoose.Schema({
     },
     itemId:{
         type: mongoose.Schema.Types.ObjectId,   // ???
-        required: true
+        required: true,
+        refPath: 'itemType'
     },
     itemType:{
         type: String,
-        enum: ["hotel", "cab"], /// ??
+        enum: ["Hotel", "Cab"], /// ??
         required: true
     },
     checkInDate:{

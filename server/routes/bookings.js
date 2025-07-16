@@ -4,6 +4,9 @@ const express = require('express');
 const router = express.Router();
 
 const Booking = require('../models/Booking');
+const authMiddleware = require('../middleware/authMiddleware')
+const Hotel = require('../models/Hotel')
+const Cab = require('../models/Cab')
 
 
 router.post('/', async(req, res) => {
@@ -32,6 +35,30 @@ router.post('/', async(req, res) => {
         console.error(error);
         return res.status(500).json({message: "Error creating booking. "});
 
+    }
+});
+
+
+router.get('/my-hotels', authMiddleware, async (req, res) => {
+    try {
+        const bookings = await Booking.find({
+            userId: req.user._id,
+            itemType: "hotel",
+        }).populate('itemId');
+        res.json(bookings);
+    } catch(error){
+        console.error(error);
+        res.status(500).json({ message: "Failed to fetch the bookings."})
+    }
+})
+
+router.get('/user/:userId', async (req, res) => {
+    try {
+        const bookings = await Booking.find({ userId: req.params.userId }).populate('itemId');
+        res.json(bookings);
+    } catch(err){
+        console.error(err);
+        res.status(500).json({ message:"Failed to fetch the bookings."});
     }
 });
 

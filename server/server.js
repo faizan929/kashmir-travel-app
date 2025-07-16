@@ -4,6 +4,10 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 
+require('./models/Hotel')
+require('./models/Cab')
+
+
 // cors ????
 
 require('dotenv').config();
@@ -18,6 +22,7 @@ app.use('/api/auth', require('./routes/auth'));
 app.use('/api/hotels', require('./routes/hotels'))
 app.use('/api/cabs', require('./routes/cabs'))
 app.use('/api/bookings', require('./routes/bookings'))
+
 
 mongoose.connect(process.env.MONGO_URI)
     .then(() =>{

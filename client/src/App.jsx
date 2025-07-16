@@ -7,10 +7,12 @@ import LoginPopup from "./components/LoginPopup";
 
 
 
+
 import Home from "./pages/Home"
 import About from "./pages/About";
 import Hotels from "./pages/Hotels";
 import Cabs from "./pages/Cabs";
+import MyBookings from "./pages/MyBookings"
 
 function App(){
 
@@ -111,6 +113,7 @@ function App(){
                   <Route path="/about" element={<About />} />
                   <Route path="/hotels" element={<Hotels />} />
                   <Route path="/cabs" element={<Cabs />} />
+                  <Route path="/mybookings" element={<MyBookings/>} />
               </Routes>
     
     </>

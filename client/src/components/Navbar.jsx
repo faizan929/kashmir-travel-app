@@ -29,6 +29,7 @@ function Navbar({setShowLogin}) {
                     <Link to="/hotels">Hotels</Link>
                     <Link to="/cabs">Cabs</Link>
                     <Link to="/about">About</Link>
+                    <Link to="/mybookings">My bookings</Link>
                 </div>
             </div>
           

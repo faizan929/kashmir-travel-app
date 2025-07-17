@@ -19,7 +19,7 @@ function Navbar({setShowLogin}) {
         <nav className="navbar">
             <div className="navbar-left">
                 <h2 className="logo">
-                    <Link to="/" className="logo-link">SafarKashmir</Link>
+                    <Link to="/" className="logo-link">safarNama</Link>
                 </h2>
                 <span className="tagline">Assi ti Lassi</span>
             </div>

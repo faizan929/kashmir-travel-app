@@ -1,6 +1,9 @@
 
 import {useEffect, useState} from 'react';
 
+
+import CabBookingForm from "../components/CabBookingForm"
+
 function Cabs(){
 
     const [cabs, setCabs] = useState([]);
@@ -46,15 +49,41 @@ function Cabs(){
         setFormData(prev=>({... prev, [e.target.name]: e.target.value}));
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log('Booking:', {
-            ...formData,
+        const bookingData = {
             cabId: selectedCab._id,
-            pricePerDay: selectedCab.pricePerDay
-        });
-        closeModal();
-    }
+            cabName: selectedCab.name,
+            pricePerDay: selectedCab.pricePerDay,
+            fromDate: formData.fromDate,
+            toDate: formData.fromDate,
+            pickupLocation: formData.pickupLocation,
+            dropLocation: formData.dropLocation,
+        };
+
+        try{ 
+            const res = await fetch("http://localhost:5000/api/cab-bookings", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                }, 
+                body: JSON.stringify(bookingData)
+            });
+            const result = await res.json();
+            if (res.ok) {
+                alert("Cab booked successfully.");
+                closeModal();
+            }else{
+                alert(result.message || "Booking failed.");
+            }
+        } catch(err){
+            console.error(err);
+            alert("Server error, try again later.")
+        }
+           
+       
+    };
+    
     return (
         <div className="cab-page">
             <h2>Cabs in Kashmir</h2>
@@ -73,66 +102,16 @@ function Cabs(){
                     </li>
                 ))}
             </ul>
-
-
-            {showModal && selectedCab && (
-                <div className = "modal">
-                    <div className = "modal-content">
-                        <h3>Book {selectedCab.name}</h3>
-                        <form onSubmit={handleSubmit}>
-                            <label>
-                                From Date:
-                                  <input 
-                                  type = "date" 
-                                  name = "fromDate" 
-                                  value = {formData.fromDate} 
-                                  onChange = {handleChange} 
-                                  required />
-                            </label>
-                            <br />
-                            <label>
-                                To Date:
-                                <input
-                                    type = "date"
-                                    name = "toDate"
-                                    value = {formData.toDate}
-                                    onChange = {handleChange}
-                                    required
-
-
-
-                                />
-
-                            </label>
-                            <br />
-                            <label>
-                                Pickup Location:
-                                <input 
-                                    type = "text"
-                                    name = "pickupLocation"
-                                    value = {formData.pickupLocation}
-                                    onChange = {handleChange}
-                                
-                                />
-
-                            </label>
-                            <br /> 
-                            <label>
-                                Drop Location:
-                                <input 
-                                type = "text" 
-                                name = "dropLocation" 
-                                value = {formData.dropLocation} 
-                                onChange = {handleChange} 
-                                required />
-                            </label>
-                            <br />
-                            <button type = "submit">Confirm Booking</button>
-                            <button type = "button" onClick = {closeModal}>Cancel</button>
-                        </form>
-                    </div>
-                </div>
-            )}
+                    {showModal && selectedCab && (
+                        <CabBookingForm
+                            selectedCab={selectedCab}
+                            formData={formData}
+                            onChange={handleChange}
+                            onSubmit={handleSubmit}
+                            onClose={closeModal}
+                        />
+                    )}
+               
 
         </div>
     );

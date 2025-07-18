@@ -8,7 +8,7 @@ function HotelBookingForm( {showForm, onClose, hotelId, onBookingSuccess} ) {
     const [checkInDate, setCheckInDate] = useState("");  //// ??
     const [checkOutDate, setCheckOutDate] = useState("");
     const [guests, setGuests] = useState(1);
-    const [note , setNote] = useState(" ");
+    const [note , setNote] = useState("");
 
 
     if (!showForm) return null;
@@ -22,15 +22,14 @@ function HotelBookingForm( {showForm, onClose, hotelId, onBookingSuccess} ) {
         }
 
         try {
-            const res = await fetch("http://localhost:5000/api/bookings",{
+            const res = await fetch("http://localhost:5000/api/hotel-bookings",{
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json", 
                 },
                 body: JSON.stringify({
                     userId: user._id,
-                    itemId: hotelId,
-                    itemType: "hotel",
+                    hotelId,
                     checkInDate,
                     checkOutDate,
                     guests,

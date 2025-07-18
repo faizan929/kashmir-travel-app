@@ -8,6 +8,7 @@ require('./models/Hotel')
 require('./models/Cab')
 
 
+
 // cors ????
 
 require('dotenv').config();
@@ -21,7 +22,8 @@ app.use(express.json());
 app.use('/api/auth', require('./routes/auth'));
 app.use('/api/hotels', require('./routes/hotels'))
 app.use('/api/cabs', require('./routes/cabs'))
-app.use('/api/bookings', require('./routes/bookings'))
+app.use('/api/hotel-bookings', require('./routes/hotelBookingRoute'))
+app.use('/api/cab-bookings', require('./routes/cabBookingRoute')) 
 
 
 mongoose.connect(process.env.MONGO_URI)

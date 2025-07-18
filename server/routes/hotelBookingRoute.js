@@ -3,24 +3,23 @@
 const express = require('express');
 const router = express.Router();
 
-const Booking = require('../models/Booking');
+const HotelBooking = require('../models/HotelBooking');
 const authMiddleware = require('../middleware/authMiddleware')
 const Hotel = require('../models/Hotel')
-const Cab = require('../models/Cab')
+
 
 
 router.post('/', async(req, res) => {
     try {
-        const { userId, itemId, itemType, checkInDate, checkOutDate, guests, note } = req.body; 
+        const { userId, hotelId, checkInDate, checkOutDate, guests, note } = req.body; 
 
-        if( !userId || !itemId || !itemType) {
+        if( !userId || !hotelId ) {
             return res.status(400).json({message: "Missing required fields." });
         } 
 
-        const newBooking = new Booking({
+        const newBooking = new HotelBooking({
             userId,
-            itemId, 
-            itemType,
+            hotelId, 
             checkInDate,
             checkOutDate,
             guests,
@@ -41,10 +40,9 @@ router.post('/', async(req, res) => {
 
 router.get('/my-hotels', authMiddleware, async (req, res) => {
     try {
-        const bookings = await Booking.find({
+        const bookings = await HotelBooking.find({
             userId: req.user._id,
-            itemType: "hotel",
-        }).populate('itemId');
+        }).populate('hotelId');
         res.json(bookings);
     } catch(error){
         console.error(error);
@@ -54,7 +52,7 @@ router.get('/my-hotels', authMiddleware, async (req, res) => {
 
 router.get('/user/:userId', async (req, res) => {
     try {
-        const bookings = await Booking.find({ userId: req.params.userId }).populate('itemId');
+        const bookings = await HotelBooking.find({ userId: req.params.userId }).populate('hotelId');
         res.json(bookings);
     } catch(err){
         console.error(err);

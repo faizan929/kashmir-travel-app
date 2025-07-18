@@ -10,7 +10,7 @@ const cabSchema = new mongoose.Schema({
     seats: Number,
     pricePerDay: Number,
     image: String,
-    availabe: Boolean,
+    available: Boolean,
     description: String
 });
 

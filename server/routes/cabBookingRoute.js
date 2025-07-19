@@ -43,4 +43,18 @@ router.post("/book-cab", async (req, res) => {
 
 });
 
+
+router.get('/user/:id', async (req, res) => {
+    const userId = req.params.id;
+
+
+    try {
+        const bookings = await CabBooking.find({ userId }).populate("cabId");
+        res.json(bookings);
+    }catch(error){
+        console.error(error);
+        res.status(500).json({message: "Failed to fetch cab bookings."});
+    }
+});
+
 module.exports = router

@@ -51,8 +51,9 @@ router.get('/my-hotels', authMiddleware, async (req, res) => {
 })
 
 router.get('/user/:userId', async (req, res) => {
+
     try {
-        const bookings = await HotelBooking.find({ userId: req.params.userId }).populate('hotelId');
+        const bookings = await HotelBooking.find({ userId: req.params.userId }).populate("hotelId");
         res.json(bookings);
     } catch(err){
         console.error(err);

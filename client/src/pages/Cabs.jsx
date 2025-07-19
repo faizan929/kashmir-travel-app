@@ -13,7 +13,10 @@ function Cabs(){
         fromDate: '',
         toDate: '',
         pickupLocation: '',
-        dropLocation: ''
+        dropLocation: '',
+        phone: '',
+        time: '',
+        note: ''
     })
 
 
@@ -41,7 +44,10 @@ function Cabs(){
             fromDate: '',
             toDate: '',
             pickupLocation: '',
-            dropLocation: ''
+            dropLocation: '',
+            phone:'',
+            time:'',
+            note: ''
         });
     };
 
@@ -51,18 +57,29 @@ function Cabs(){
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        const user = JSON.parse(localStorage.getItem("user"));
+        if (!user) {
+            alert("Please log in to book.");
+            return;
+        }
+
         const bookingData = {
+            userId: user._id,
             cabId: selectedCab._id,
-            cabName: selectedCab.name,
-            pricePerDay: selectedCab.pricePerDay,
-            fromDate: formData.fromDate,
-            toDate: formData.fromDate,
+            phone: formData.phone,
             pickupLocation: formData.pickupLocation,
             dropLocation: formData.dropLocation,
+            date: formData.fromDate,
+            time : formData.time,
+            cabType: selectedCab.type,
+            note: formData.note || ""
         };
 
+        console.log("booking data being sent", bookingData)
+
         try{ 
-            const res = await fetch("http://localhost:5000/api/cab-bookings", {
+            const res = await fetch("http://localhost:5000/api/cab-bookings/book-cab", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"

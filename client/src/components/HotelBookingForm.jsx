@@ -1,84 +1,74 @@
 
 
-import React, { useState } from "react";
+import React from "react";  
 
 import "./HotelBookingForm.css";
 
-function HotelBookingForm( {showForm, onClose, hotelId, onBookingSuccess} ) {
-    const [checkInDate, setCheckInDate] = useState("");  //// ??
-    const [checkOutDate, setCheckOutDate] = useState("");
-    const [guests, setGuests] = useState(1);
-    const [note , setNote] = useState("");
+function HotelBookingForm({
+  showForm,
+  onClose,
+  formData,
+  onChange,
+  onSubmit,
+}) {
+  if (!showForm) return null;
 
+  return (
+    <div className="booking-popup">
+      <div className="popup-inner">
+        <button className="close-btn" onClick={onClose}>
+          X
+        </button>
+        <h2>Complete your booking</h2>
+        <label>
+          Check-in Date: 
+          <input
+          type="date"
+          name="checkInDate"
+          value={formData.checkInDate}
+          onChange={onChange}
+        />
+        </label>
+        
+        <label>
+          Check-out Date:
+          <input
+          type="date"
+          name="checkOutDate"
+          value={formData.checkOutDate}
+          onChange={onChange}
+        />
+        </label>
+        
+        <label>
+          Guests:
+          <input
+          type="number"
+          name="guests"
+          value={formData.guests}
+          onChange={onChange}
+        />
+        </label>
+        
+      <label>
+      Note:
+      <textarea
+      name="note"
+      value={formData.note}
+      onChange={onChange}
+      placeholder="Any special requests?"
+      />
+      </label>
 
-    if (!showForm) return null;
+        
+       
+        
 
+        <button onClick = {onSubmit}>Confirm Booking</button>
+      </div>
+    </div>
+  );
+}
 
-    const handleBooking = async () => {
-        const user = JSON.parse(localStorage.getItem("user"));
-        if (!user) {
-            alert("Please log in to book");
-            return;
-        }
+export default HotelBookingForm;
 
-        try {
-            const res = await fetch("http://localhost:5000/api/hotel-bookings",{
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json", 
-                },
-                body: JSON.stringify({
-                    userId: user._id,
-                    hotelId,
-                    checkInDate,
-                    checkOutDate,
-                    guests,
-                    note,
-
-                }),
-            });
-            const data = await res.json();
-            if (res.ok) {
-                alert("Booking Successful.");
-                onBookingSuccess();  /// optional callback
-
-            } else {
-                alert(data.message || "Booking failed.");
-            }
-        }catch(err){
-            console.error(err);
-            alert("Booking failed")
-        }
-    };
-
-    return (
-        <div className = "booking-popup">
-            <div className = "popup-inner">
-                <button className = "close-btn" onClick={onClose}>X</button>
-                <h2>Complete your booking</h2>
-
-
-
-                <label>Check-in Date:</label>
-                <input type = "date" value = {checkInDate} onChange = {(e) => setCheckInDate(e.target.value)} />
-
-
-                <label>Check-out Date:</label>
-                <input type = "date" value = {checkOutDate} onChange = {(e) => setCheckOutDate(e.target.value)} />
-
-
-                <label>No. of guests:</label>
-                <input type = "number" value = {guests} onChange = {(e) => setGuests(e.target.value)}  />
-
-                <label>Note(optional):</label>
-                <textarea value = {note} onChange = { (e) => setNote(e.target.value)} placeholder = "Special requests..." />
-
-                <button onClick = {handleBooking}>Confirm Booking</button>
-
-            </div>
-        </div>
-    );
-
-}  
-
-export default HotelBookingForm

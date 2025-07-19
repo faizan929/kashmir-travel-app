@@ -4,30 +4,36 @@ const express = require('express');
 const router = express.Router();
 const Cab = require('../models/Cab');
 
-
-router.post('/', async (req, res) => {
-    try {
-        const newCab = new Cab(req.body);
-        await newCab.save()
-        res.status(201).json({message: 'Cab added successfully.'});
-    }catch(error){
-        console.error(error);
-        res.status(500).json({ message: 'Error adding cab.'});
-    }
-});
+const {createCab, getAllCabs} = require('../controllers/cabController')
 
 
+router.post("/", createCab)
+router.get("/", getAllCabs)
 
-router.get('/', async (req, res) => {
-    try {
-        const cabs = await Cab.find();
-        res.json(cabs);
+// router.post('/', async (req, res) => {
+//     try {
+//         const newCab = new Cab(req.body);
+//         await newCab.save()
+//         res.status(201).json({message: 'Cab added successfully.'});
+//     }catch(error){
+//         console.error(error);
+//         res.status(500).json({ message: 'Error adding cab.'});
+//     }
+// });
 
-    }catch(error){
-        console.error(error);
-        res.status(500).json({message: 'Error fetching cabs.'})
-        }
-});
+
+
+// router.get('/', async (req, res) => {
+//     try {
+//         const cabs = await Cab.find();
+//         res.json(cabs);
+
+//     }catch(error){
+//         console.error(error);
+//         res.status(500).json({message: 'Error fetching cabs.'})
+//         }
+// });
+
 
 
 module.exports = router ;

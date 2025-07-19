@@ -13,6 +13,7 @@ import About from "./pages/About";
 import Hotels from "./pages/Hotels";
 import Cabs from "./pages/Cabs";
 import MyBookings from "./pages/MyBookings"
+import AdminDashboard from "./pages/AdminDashboard"
 
 function App(){
 
@@ -22,6 +23,10 @@ function App(){
       const [name, setName]=useState("")
       const [confirmPassword, setConfirmPassword]=useState("")
       const [isSignup, setIsSignup]=useState(false);
+      const [user, setUser] = useState(() =>{
+        const storedUser = localStorage.getItem("user");
+        return storedUser ? JSON.parse(storedUser) : null;
+      });
      
     async function handleLogin(){
         if (isSignup){
@@ -76,6 +81,7 @@ function App(){
 
               localStorage.setItem("token", data.token);
               localStorage.setItem("user", JSON.stringify(data.user))
+              setUser(data.user);
 
 
               alert("Login successful.");
@@ -90,7 +96,7 @@ function App(){
 
   return (
     <>
-        <Navbar onLoginClick={()=> setShowLogin(true)} />
+        <Navbar setShowLogin={setShowLogin} user ={user} setUser = {setUser}/>
         {showLogin && (
                   <LoginPopup
                         isSignup={isSignup}
@@ -109,11 +115,12 @@ function App(){
                 )}
         
              <Routes>
-                  <Route path="/" element={<Home />} />
-                  <Route path="/about" element={<About />} />
-                  <Route path="/hotels" element={<Hotels />} />
-                  <Route path="/cabs" element={<Cabs />} />
-                  <Route path="/mybookings" element={<MyBookings/>} />
+                  <Route path ="/" element={<Home />} />
+                  <Route path ="/about" element={<About />} />
+                  <Route path ="/hotels" element={<Hotels />} />
+                  <Route path ="/cabs" element={<Cabs />} />
+                  <Route path ="/mybookings" element={<MyBookings/>} />
+                  <Route path ="/admin" element={<AdminDashboard/>} />
               </Routes>
     
     </>

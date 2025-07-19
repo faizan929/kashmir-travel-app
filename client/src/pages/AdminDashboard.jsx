@@ -42,7 +42,7 @@ function AdminDashboard() {
 
 }, [user]);  //run this only when the component mounts
 
-        if (user == null ) return <p>Loading....</p>
+        if (user == null ) return <p>Access Denied.</p>
         if (!user?.isAdmin) return <p>Access Denied.</p>
 
 

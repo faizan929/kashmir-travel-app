@@ -12,7 +12,7 @@ function Navbar({setShowLogin,user,setUser}) {
         <nav className="navbar">
             <div className="navbar-left">
                 <h2 className="logo">
-                    <Link to="/" className="logo-link">TravelApp</Link>
+                    <Link to="/" className="logo-link">SafarNama</Link>
                 </h2>
                 <span className="tagline">Assi ti Lassi</span>
             </div>

@@ -18,6 +18,8 @@ function AdminDashboard() {
 
     const [hotels, setHotels] = useState([]);
     const [cabs, setCabs] = useState([]);
+    const [editHotel, setEditHotel] = useState(null);
+    const [editCab, setEditCab] = useState(null);
     
     const [user, setUser] = useState(null);
     const [showHotelForm, setShowHotelForm] = useState(false);
@@ -56,26 +58,78 @@ function AdminDashboard() {
         if (!user?.isAdmin) return <p>Access Denied.</p>
     const handleHotelSubmit = async(data) => {
         try{ 
-            const savedHotel = await submitHotel(data);
-            setHotels((prev) => [...prev, savedHotel]);
-            setShowHotelForm(false);
+            if(editHotel) {
+                const res = await fetch(`http://localhost:5000/api/hotels/${editHotel._id}`,{
+                    method: 'PUT',
+                    headers: {"Content-Type": "application/json"},
+                    body: JSON.stringify(data),
+                });
+                const updatedHotel = await res.json();
+                setHotels((prev) => 
+                prev.map((h) => (h._id === updatedHotel._id? updatedHotel : h))
+            );
+            setEditHotel(null);
+            } else {
+                const savedHotel = await submitHotel(data);
+                setHotels((prev) => [...prev, savedHotel]);
+            }
         }catch(err){
             console.error(err);
-            alert("Error adding hotel");
+            alert("Error handling hotel");
         }
     };
 
 
     const handleCabSubmit = async (data) => {
         try {
-            const savedCab = await submitCab(data);
-            setCabs((prev) => [...prev, savedCab]);
-            setShowCabForm(false);
+            if (editCab){
+            const res = await fetch(`http://localhost:5000/api/cabs/${editCab._id}`,{
+                method: 'PUT',
+                headers: {'Content-Type':"application/json"},
+                body: JSON.stringify(data),
+            });
+            const updatedCab = await res.json();
+            setCabs((prev) =>
+            prev.map((c) => (c._id === updatedCab._id? updatedCab : c))
+        );
+        setEditCab(null);
+            } else {
+                const savedCab = await submitCab(data);
+                setCabs((prev) => [...prev, savedCab]);
+                setShowCabForm(false);
+            }
+            
         }catch(err){
             console.error(err);
-            alert("Error adding cab")
+            alert("Error handling cab")
         }
-    }
+    };
+
+        const handleDeleteHotel = async (id) => {
+            try {
+                await fetch (`http://localhost:5000/api/hotels/${id}`, {
+                    method : 'DELETE'
+
+                });
+                setHotels((prev) => prev.filter((hotel) => hotel._id !== id));
+            } catch(error) {
+                console.error(error);
+                alert("Error deleting the hotel");
+            }
+        }
+
+        const handleDeleteCab = async (id) => {
+            try {
+                await fetch (`http://localhost:5000/api/cabs/${id}`, {
+                    method : 'DELETE'
+
+                });
+                setCabs((prev) => prev.filter((cab) => cab._id !== id));
+            } catch(error) {
+                console.error(error);
+                alert("Error deleting the cab");
+            }
+        }
     return (
         <div>
             <h2>Admin Dashboard</h2>
@@ -83,10 +137,21 @@ function AdminDashboard() {
             <button onClick ={() => setShowHotelForm(!showHotelForm)}>
                 {showHotelForm?"Cancel":"Add Hotel"}
             </button>
-            {showHotelForm && <AddHotelForm onSubmit = { (data) => handleHotelSubmit(data)} />}
+            {showHotelForm && (
+            <AddHotelForm 
+                onSubmit = { (data) => handleHotelSubmit(data)} 
+                initialData = {editHotel} 
+                />
+            )}
             <ul>
                  {hotels.map((hotel) => (
-                    <li key = {hotel._id}>{hotel.name}</li>
+                    <li key = {hotel._id}>{hotel.name}
+                        <button onClick = {() => {
+                            setEditHotel(hotel);
+                            setShowHotelForm(true); 
+                        }}>Edit</button>
+                        <button onClick = {() => handleDeleteHotel(hotel._id)}>Delete</button>
+                    </li>
                  ))}
             </ul>
 
@@ -96,11 +161,22 @@ function AdminDashboard() {
             <button onClick = {()=>  setShowCabForm(!showCabForm)}>
                 {showCabForm ? "Cancel" : "Add Cab"}
             </button>
-            {showCabForm && <AddCabForm onSubmit = {(data) => handleCabSubmit(data)} />}
+            {showCabForm && (
+                <AddCabForm 
+                onSubmit = {(data) => handleCabSubmit(data)} 
+                initialData = {editCab}
+                />
+            )}
             
             <ul>
                 {cabs.map((cab) => (
-                    <li key = {cab._id}>{cab.name}</li>
+                    <li key = {cab._id}>{cab.name}
+                        <button onClick = {() =>{ 
+                            setEditCab(cab);
+                            setShowCabForm(true);
+                        }}>Edit</button>
+                        <button onClick = {() => handleDeleteCab(cab._id)}>Delete</button>
+                    </li>
                 ))}
             </ul>
         </div>

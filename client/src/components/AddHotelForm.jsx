@@ -3,7 +3,7 @@
 import { useState } from "react";
 
 function AddHotelForm({ onSubmit }) {
-    const [ formData, setFormData ] = useState({ name: "", location: ""});
+    const [ formData, setFormData ] = useState({ name: "", location: "", price:"", description:""});
     const handleChange = (e) => {
         setFormData({...formData, [e.target.name]: e.target.value});
     };
@@ -11,7 +11,7 @@ function AddHotelForm({ onSubmit }) {
     const handleSubmit = (e) => {
         e.preventDefault();
         onSubmit(formData);
-        setFormData({ name: "", location: ""});
+        setFormData({ name: "", location: "", price: "", description: ""});
     };
 
     return (
@@ -31,7 +31,20 @@ function AddHotelForm({ onSubmit }) {
                 value={formData.location}
                 onChange={handleChange}
             />
-
+            <input 
+                type = "number"
+                name = "price"
+                placeholder = "Price"
+                value = {formData.price}
+                onChange = {handleChange}
+            />
+            <input 
+                type = "text"
+                name = "description"
+                placeholder = "Description"
+                value = {formData.description}
+                onChange = {handleChange}
+            />
             <button type = "submit">Submit</button>
         </form>
     </>

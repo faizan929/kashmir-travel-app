@@ -3,6 +3,8 @@
 import SearchBar from "../components/SearchBar";
 import CardList from "../components/CardList";
 
+import './Home.css'
+
 function Home(){
    
     return(

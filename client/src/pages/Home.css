@@ -1,0 +1,48 @@
+.hero-section {
+  position: relative;
+  width: 100%;
+  height: 80vh;
+  overflow: hidden;
+}
+
+.hero-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(65%);
+}
+
+.hero-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  text-align: center;
+}
+
+.explore-btn {
+  padding: 0.7rem 1.5rem;
+  font-size: 1rem;
+  background-color: #ffffffcc;
+  color: #000;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.explore-btn:hover {
+  background-color: #ffffff;
+}
+
+.info {
+  font-size: 1.2rem;
+  color: #b11818b7;
+  margin-top: 5px;
+}
+
+.explore {
+  margin: 40px auto;
+  text-align: center;  
+}

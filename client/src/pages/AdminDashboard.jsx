@@ -1,6 +1,6 @@
 
 
-
+import "./Admin.css"
 
 import {useEffect, useState} from "react";
 
@@ -131,7 +131,7 @@ function AdminDashboard() {
             }
         }
     return (
-        <div>
+        <div className="admin-dashboard">
             <h2>Admin Dashboard</h2>
             <h3>Hotels ({hotels.length})</h3>
             <button onClick ={() => setShowHotelForm(!showHotelForm)}>
@@ -143,14 +143,15 @@ function AdminDashboard() {
                 initialData = {editHotel} 
                 />
             )}
-            <ul>
+            <ul className = "hotel-list">
                  {hotels.map((hotel) => (
-                    <li key = {hotel._id}>{hotel.name}
-                        <button onClick = {() => {
-                            setEditHotel(hotel);
-                            setShowHotelForm(true); 
-                        }}>Edit</button>
-                        <button onClick = {() => handleDeleteHotel(hotel._id)}>Delete</button>
+                    <li key = {hotel._id} className = "hotel-item">
+                        <span className = "hotel-name">{hotel.name}</span>
+                        <div className = "hotel-actions">
+                            <button onClick = {() => {setEditHotel(hotel); setShowHotelForm(true); }}>Edit</button>
+                            <button onClick = {() => handleDeleteHotel(hotel._id)}>Delete</button>
+                        </div>
+                        
                     </li>
                  ))}
             </ul>
@@ -168,14 +169,15 @@ function AdminDashboard() {
                 />
             )}
             
-            <ul>
+            <ul className = "cab-list">
                 {cabs.map((cab) => (
-                    <li key = {cab._id}>{cab.name}
-                        <button onClick = {() =>{ 
-                            setEditCab(cab);
-                            setShowCabForm(true);
-                        }}>Edit</button>
-                        <button onClick = {() => handleDeleteCab(cab._id)}>Delete</button>
+                    <li key = {cab._id} className = "cab-item">
+                        <span class="cab-name">{cab.name}</span>
+                        <div className = "cab-actions">
+                             <button onClick = {() =>{ setEditCab(cab); setShowCabForm(true); }}>Edit</button>
+                                <button onClick = {() => handleDeleteCab(cab._id)}>Delete</button>
+                        </div>
+                       
                     </li>
                 ))}
             </ul>

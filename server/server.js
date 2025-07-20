@@ -6,12 +6,9 @@ const cors = require('cors');
 
 require('./models/Hotel')
 require('./models/Cab')
-
-
-
-// cors ????
-
 require('dotenv').config();
+
+const connectDB = require("./config/db");
 
 const app = express()   
 
@@ -26,10 +23,8 @@ app.use('/api/hotel-bookings', require('./routes/hotelBookingRoute'))
 app.use('/api/cab-bookings', require('./routes/cabBookingRoute')) 
 
 
-mongoose.connect(process.env.MONGO_URI)
-    .then(() =>{
+connectDB().then(() =>{
         app.listen( 5000, () => {
             console.log("Server is running at 5000");
         });
-    })
-    .catch(err => console.error(err));
+    });

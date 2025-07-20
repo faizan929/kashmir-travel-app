@@ -4,36 +4,14 @@ const express = require('express');
 const router = express.Router();
 
 const Hotel = require('../models/Hotel');
-const { createHotel, getAllHotels } = require('../controllers/hotelController');
+const { createHotel, getAllHotels, updateHotel, deleteHotel} = require('../controllers/hotelController');
 
 
 
 router.post("/", createHotel)
 router.get("/", getAllHotels)
-
-
-
-// router.post('/', async (req, res) => {
-//     try{
-//         const newHotel = new Hotel(req.body);
-//         await newHotel.save();
-//         res.status(201).json({message:'Hotel added successfully', hotel: newHotel });
-//     }catch(error){
-//         console.error(error);
-//         res.status(500).json({message: 'Error adding hotel'});
-//     }
-// });
-
-// router.get('/', async(req, res) => {
-//     try {
-//         const hotels = await Hotel.find();
-//         res.json(hotels);
-//     }catch(error){
-//         console.error(error);
-//             res.status(500).json({message: 'Error fetching hotels.'});
-//         }
-//     });
-
+router.put("/:id", updateHotel);
+router.delete("/:id", deleteHotel)
 
 
 

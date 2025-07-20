@@ -20,4 +20,30 @@ const getAllCabs = async (req, res) => {
     }
 };
 
-module.exports = { createCab, getAllCabs };
+const updateCab = async (req, res) => {
+    try {
+        const updatedCab = await Cab.findByIdAndUpdate(
+            req.params.id,
+            req.body,
+            { new: true }
+        );
+        res.status(200).json(updatedCab);
+        
+       
+    }catch(error ){
+        res.status(500).json({message: "Failed to update the cab", error});
+    }
+};
+
+
+const deleteCab = async (req, res) => { 
+    try {
+        await Cab.findByIdAndDelete(req.params.id);
+        res.status(200).json({message: "Cab deleted successfully"})    
+    }catch(error){
+        res.status(500).json({message: "Failed to delete the cab"})
+    }
+    
+};
+
+module.exports = { createCab, getAllCabs, updateCab, deleteCab };

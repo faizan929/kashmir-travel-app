@@ -4,35 +4,14 @@ const express = require('express');
 const router = express.Router();
 const Cab = require('../models/Cab');
 
-const {createCab, getAllCabs} = require('../controllers/cabController')
+const {createCab, getAllCabs, updateCab, deleteCab} = require('../controllers/cabController')
 
 
 router.post("/", createCab)
 router.get("/", getAllCabs)
+router.put("/:id", updateCab);
+router.delete("/:id", deleteCab);
 
-// router.post('/', async (req, res) => {
-//     try {
-//         const newCab = new Cab(req.body);
-//         await newCab.save()
-//         res.status(201).json({message: 'Cab added successfully.'});
-//     }catch(error){
-//         console.error(error);
-//         res.status(500).json({ message: 'Error adding cab.'});
-//     }
-// });
-
-
-
-// router.get('/', async (req, res) => {
-//     try {
-//         const cabs = await Cab.find();
-//         res.json(cabs);
-
-//     }catch(error){
-//         console.error(error);
-//         res.status(500).json({message: 'Error fetching cabs.'})
-//         }
-// });
 
 
 

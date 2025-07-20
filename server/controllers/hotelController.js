@@ -1,5 +1,6 @@
 
 
+const { trusted } = require("mongoose");
 const Hotel = require("../models/Hotel")
 
 
@@ -25,5 +26,29 @@ const getAllHotels = async (req, res) => {
     }
 };
 
+const updateHotel = async (req, res) => {
+    try {
+        const updatedHotel = await Hotel.findByIdAndUpdate(
+            req.params.id,
+            req.body,
+            {new: true}
+        );
+        res.status(200).json(updatedHotel);
+       
+    }catch(error ){
+        res.status(500).json({message: "Failed to update the hotel", error});
+    }
+};
 
-module.exports = {createHotel, getAllHotels}
+const deleteHotel = async (req, res) => { 
+    try {
+        await Hotel.findByIdAndDelete(req.params.id);
+    res.status(200).json({message: "Hotel deleted successfully"})    
+    }catch(error){
+        res.status(500).json({message: "Failed to delete the hotel"})
+    }
+    
+}
+
+
+module.exports = { createHotel, getAllHotels, updateHotel, deleteHotel }

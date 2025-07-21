@@ -1,6 +1,6 @@
 
 
-
+import "./SearchBar.css"
 function SearchBar(){
     return(
     <div className="search-bar" id="search-bar">

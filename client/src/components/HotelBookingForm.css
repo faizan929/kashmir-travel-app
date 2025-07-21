@@ -2,52 +2,34 @@
   position: fixed;
   top: 0;
   left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: rgba(0, 0, 0, 0.5);
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 100;
+  z-index: 1000;
 }
 
 .popup-inner {
+  position: relative;
   background: white;
-  padding: 30px;
-  border-radius: 10px;
-  width: 400px;
-  max-width: 90%;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-}
-
-.popup-inner h2 {
-  margin-bottom: 20px;
-}
-
-.popup-inner input,
-.popup-inner textarea {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 15px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-}
-
-.popup-inner button {
-  padding: 10px 20px;
-  background-color: #7030ac;
-  color: white;
-  border: none;
-  cursor: pointer;
-  border-radius: 5px;
+  padding: 20px;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 500px;
 }
 
 .close-btn {
   position: absolute;
-  top: 15px;
-  right: 20px;
-  background: transparent;
+  top: 10px;
+  right: 10px;
+  background: #9333ea;
+  color: white;
   border: none;
-  font-size: 1.4rem;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
   cursor: pointer;
+  font-size: 18px;
 }

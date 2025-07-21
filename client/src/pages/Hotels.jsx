@@ -1,5 +1,5 @@
 
-
+import './Hotels.css'
 
 import {useEffect, useState} from 'react';
 import HotelBookingForm from '../components/HotelBookingForm';

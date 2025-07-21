@@ -8,7 +8,7 @@ import { AuthProvider } from './context/AuthProvider.jsx';
 
 
 
-import './index.css'
+import './global.css'
 
 
 // import Login from './pages/login.jsx'

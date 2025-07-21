@@ -1,4 +1,6 @@
 
+
+import "./Cabs.css"
 import {useEffect, useState} from 'react';
 
 

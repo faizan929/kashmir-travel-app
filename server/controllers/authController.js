@@ -13,7 +13,6 @@ exports.register = async(req, res) => {
         if (existingUser) return res.status(400).json({ error: "User already exists" });
 
         const hashedPassword = await bcrypt.hash(password, 10);
-          // ???
         const newUser = await User.create({ name, email, password: hashedPassword });
 
         res.status(201).json({ message: "User registered successfully "});
@@ -23,7 +22,6 @@ exports.register = async(req, res) => {
     }
 };
 
-// exports ?? ??
 
 exports.login = async(req, res) => {
     try{

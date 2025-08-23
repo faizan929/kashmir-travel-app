@@ -9,8 +9,8 @@ const {register, login} = require('../controllers/authController');
 router.post('/register', register);
 router.post('/login', login)
 
-// Protected Route
 
+//protected route
 router.get('/me', authMiddleware, (req, res) => {
      res.json({ message: "You are authorized", user: req.user })
 });

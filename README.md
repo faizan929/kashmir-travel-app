@@ -1,6 +1,6 @@
 # Kashmir Travel App
 
-SafarNama is a full-stack travel booking platform focused on Kashmir tourism. It allows users to explore, book, and manage cab and hotel reservations with ease. Admin users have a separate dashboard to manage listings in real-time.
+KashmirTravel is a full-stack travel booking platform focused on Kashmir tourism. It allows users to explore, book, and manage cab and hotel reservations with ease. Admin users have a separate dashboard to manage listings in real-time.
 
 ## 🌐 Tech Stack
 - Frontend: React.js

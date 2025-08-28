@@ -8,7 +8,7 @@ function About() {
                     <div className="bg-white rounded-2xl shadow-xl p-8 md:p-12">
                         <div className="mb-8">
                             <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-6">
-                                About <span className="text-blue-600">SafarKashmir</span>
+                                About <span className="text-blue-600">KashmirTravel</span>
                             </h2>
                             <div className="w-24 h-1 bg-blue-600 mx-auto mb-8"></div>
                         </div>

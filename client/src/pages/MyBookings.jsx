@@ -24,6 +24,8 @@ function MyBookings() {
       } catch (error) {
         console.error(error);
         alert("Failed to load the bookings.");
+      } finally {
+        setLoading(false);
       }
     };
     fetchBookings();
@@ -35,9 +37,10 @@ function MyBookings() {
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
       </div>
     );
-  }else{
-    setLoading(false);  //// here
   }
+  // else{
+  //   setLoading(false);  //// here
+  // }
 
 
     if (!Array.isArray(bookings)) {
